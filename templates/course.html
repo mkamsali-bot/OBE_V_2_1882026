@@ -1,0 +1,47 @@
+<!-- ===================================================== -->
+<!-- Course Type -->
+<!-- Place this block immediately after the Regulation field -->
+<!-- ===================================================== -->
+
+<div class="col-md-6 mb-3">
+
+    <label class="form-label">
+
+        Course Type
+
+    </label>
+
+    <select
+        name="course_type"
+        class="form-select"
+        required>
+
+        <option value="">-- Select Course Type --</option>
+
+        <option
+            value="Theory"
+            {% if course and course.course_type == "Theory" %}selected{% endif %}>
+            Theory
+        </option>
+
+        <option
+            value="Theory + Practical"
+            {% if course and course.course_type == "Theory + Practical" %}selected{% endif %}>
+            Theory + Practical
+        </option>
+
+        <option
+            value="Capstone"
+            {% if course and course.course_type == "Capstone" %}selected{% endif %}>
+            Capstone
+        </option>
+
+        <option
+            value="Internship"
+            {% if course and course.course_type == "Internship" %}selected{% endif %}>
+            Internship
+        </option>
+
+    </select>
+
+</div>

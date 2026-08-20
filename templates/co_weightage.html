@@ -1,0 +1,437 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h2 class="text-primary mb-0">
+
+            CO Weightage
+
+        </h2>
+
+        <a href="/masters" class="btn btn-dark">
+
+            ← Masters
+
+        </a>
+
+    </div>
+
+    {% if weightage %}
+
+    <form method="post" action="/co-weightage/update/{{ weightage.id }}">
+
+    {% else %}
+
+    <form method="post" action="/co-weightage/save">
+
+    {% endif %}
+
+        <div class="card shadow-sm mb-4">
+
+            <div class="card-header bg-primary text-white">
+
+                CO Weightage Details
+
+            </div>
+
+            <div class="card-body">
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            Course
+
+                        </label>
+
+                        <select
+                            name="course_id"
+                            class="form-select"
+                            required>
+
+                            {% for course in courses %}
+
+                            <option
+                                value="{{ course.id }}"
+                                {% if weightage and weightage.course_id == course.id %}selected{% endif %}>
+
+                                {{ course.course_code }} - {{ course.course_name }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            Course Outcome
+
+                        </label>
+
+                        <select
+                            name="co_id"
+                            class="form-select"
+                            required>
+
+                            {% for co in cos %}
+
+                            <option
+                                value="{{ co.id }}"
+                                {% if weightage and weightage.co_id == co.id %}selected{% endif %}>
+
+                                {{ co.co_code }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <div class="row">
+
+                    <div class="col-md-3 mb-3">
+
+                        <label>LE</label>
+
+                        <input
+                            type="number"
+                            step="0.01"
+                            name="le_weightage"
+                            class="form-control"
+                            value="{{ weightage.le_weightage if weightage else 0 }}">
+
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+
+                        <label>SE1</label>
+
+                        <input
+                            type="number"
+                            step="0.01"
+                            name="se1_weightage"
+                            class="form-control"
+                            value="{{ weightage.se1_weightage if weightage else 0 }}">
+
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+
+                        <label>SE2</label>
+
+                        <input
+                            type="number"
+                            step="0.01"
+                            name="se2_weightage"
+                            class="form-control"
+                            value="{{ weightage.se2_weightage if weightage else 0 }}">
+
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+
+                        <label>Assignment</label>
+
+                        <input
+                            type="number"
+                            step="0.01"
+                            name="assignment_weightage"
+                            class="form-control"
+                            value="{{ weightage.assignment_weightage if weightage else 0 }}">
+
+                    </div>
+
+                </div>
+                                <div class="row">
+
+                    <div class="col-md-3 mb-3">
+
+                        <label>Practical</label>
+
+                        <input
+                            type="number"
+                            step="0.01"
+                            name="practical_weightage"
+                            class="form-control"
+                            value="{{ weightage.practical_weightage if weightage else 0 }}">
+
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+
+                        <label>Viva</label>
+
+                        <input
+                            type="number"
+                            step="0.01"
+                            name="viva_weightage"
+                            class="form-control"
+                            value="{{ weightage.viva_weightage if weightage else 0 }}">
+
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+
+                        <label>Project</label>
+
+                        <input
+                            type="number"
+                            step="0.01"
+                            name="project_weightage"
+                            class="form-control"
+                            value="{{ weightage.project_weightage if weightage else 0 }}">
+
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+
+                        <label>Total</label>
+
+                        <input
+                            type="number"
+                            step="0.01"
+                            name="total_weightage"
+                            class="form-control"
+                            value="{{ weightage.total_weightage if weightage else 100 }}">
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-3 mb-3">
+
+                        <div class="form-check mt-4">
+
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                name="is_active"
+                                value="1"
+                                {% if not weightage or weightage.is_active %}checked{% endif %}>
+
+                            <label class="form-check-label">
+
+                                Active
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card-footer">
+
+                {% if weightage %}
+
+                <button
+                    type="submit"
+                    class="btn btn-success">
+
+                    Update
+
+                </button>
+
+                {% else %}
+
+                <button
+                    type="submit"
+                    class="btn btn-primary">
+
+                    Save
+
+                </button>
+
+                {% endif %}
+
+                <a
+                    href="/co-weightage"
+                    class="btn btn-secondary">
+
+                    Clear
+
+                </a>
+
+                <a
+                    href="/masters"
+                    class="btn btn-dark">
+
+                    ← Masters
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </form>
+
+    <!-- ========================================= -->
+    <!-- CO Weightage List -->
+    <!-- ========================================= -->
+
+    <div class="card shadow-sm">
+
+        <div class="card-header bg-dark text-white">
+
+            CO Weightage List
+
+        </div>
+
+        <div class="card-body p-0">
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered table-hover mb-0">
+
+                    <thead class="table-light">
+
+                        <tr>
+
+                            <th>Course</th>
+
+                            <th>CO</th>
+
+                            <th>LE</th>
+
+                            <th>SE1</th>
+
+                            <th>SE2</th>
+
+                            <th>Assignment</th>
+
+                            <th>Practical</th>
+
+                            <th>Viva</th>
+
+                            <th>Project</th>
+
+                            <th>Total</th>
+
+                            <th>Status</th>
+
+                            <th width="170">
+
+                                Action
+
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for row in weightages %}
+
+                        <tr>
+
+                            <td>
+
+                                {{ row.course_code }}
+
+                            </td>
+
+                            <td>
+
+                                {{ row.co_code }}
+
+                            </td>
+
+                            <td>{{ row.le_weightage }}</td>
+
+                            <td>{{ row.se1_weightage }}</td>
+
+                            <td>{{ row.se2_weightage }}</td>
+
+                            <td>{{ row.assignment_weightage }}</td>
+
+                            <td>{{ row.practical_weightage }}</td>
+
+                            <td>{{ row.viva_weightage }}</td>
+
+                            <td>{{ row.project_weightage }}</td>
+
+                            <td>{{ row.total_weightage }}</td>
+
+                            <td>
+
+                                {% if row.is_active %}
+
+                                <span class="badge bg-success">
+
+                                    Active
+
+                                </span>
+
+                                {% else %}
+
+                                <span class="badge bg-danger">
+
+                                    Inactive
+
+                                </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>
+                                                                <a
+                                    href="/co-weightage/edit/{{ row.id }}"
+                                    class="btn btn-warning btn-sm">
+
+                                    Edit
+
+                                </a>
+
+                                <a
+                                    href="/co-weightage/delete/{{ row.id }}"
+                                    class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Delete this CO Weightage?')">
+
+                                    Delete
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
